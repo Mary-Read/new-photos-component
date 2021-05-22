@@ -11,16 +11,16 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/images/:id', (req, res) => {
   let index = req.params.id;
-  let firstImageUrl = db.find({itemId: index})
+  db.find({itemId: index})
   .then((data) => {
-    console.log(data[0]._doc);
-    console.log(data[0]._doc.pictures[0]);
-    console.log(data[0]._doc.pictures[1]);
-    console.log(data[0]._doc.pictures[2]);
-    console.log('hey that worked')
+    let imageUrls = [data[0]._doc.pictures[0], data[0]._doc.pictures[1], data[0]._doc.pictures[2]]
+    console.log(imageUrls);
+    res.send(imageUrls);
   })
-  console.log(req.params.id);
-  res.end();
+  .catch((err) => {
+    console.log(err);
+    res.end();
+  })
 })
 
 app.listen(port, () => {
