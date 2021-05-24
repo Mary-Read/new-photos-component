@@ -2,14 +2,24 @@ const express = require('express');
 const app = express();
 const multer = require('multer');
 const bodyParser = require('body-parser');
-const createPhotoSchema = require('../seed.js');
 const db = require('../database/index.js')
+const cors = require('cors');
 const port = 9000;
 
-app.use(express.static(__dirname + '/../client/dist'));
-app.use(bodyParser.urlencoded({extended: false}));
+const router = express.Router();
 
-app.get('/images/:id', (req, res) => {
+const dirPath = __dirname + '/../client/dist';
+app.use('/photos/', router);
+app.use(express.static(dirPath));
+
+app.get(['/', '/p/*'], (req, res) => {
+  res.sendFile(path.join(dirPath, 'index.html'))
+})
+
+router.use(bodyParser.urlencoded({extended: true}));
+router.use(cors());
+
+router.get('/p/:id', (req, res) => {
   let index = req.params.id;
   db.find({itemId: index})
   .then((data) => {
