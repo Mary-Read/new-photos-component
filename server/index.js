@@ -25,7 +25,6 @@ router.get('/:id', (req, res) => {
   db.find({itemId: index})
   .then((data) => {
     let imageUrls = [data[0]._doc.pictures[0], data[0]._doc.pictures[1], data[0]._doc.pictures[2]]
-    console.log(imageUrls);
     res.send(imageUrls);
   })
   .catch((err) => {

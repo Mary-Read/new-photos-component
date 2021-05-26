@@ -13,7 +13,6 @@ let createPhotoSchema = () => {
   console.log('ok')
   let imageUrls = s3Methods.getPictures()
   .then((data) => {
-    console.log(data);
     let photoData = [];
     for (let i = 0; i < 16; i++) {
       let fakeId = i;
