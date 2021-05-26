@@ -4,17 +4,28 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url1: 'https://maryread-photos.s3.us-east-2.amazonaws.com/item10/item10.1.webp',
-      url2: 'https://maryread-photos.s3.us-east-2.amazonaws.com/item10/item10.2.webp',
-      url3: 'https://maryread-photos.s3.us-east-2.amazonaws.com/item10/item10.3.webp'
+      url1: this.props.imageUrls[0],
+      url2: this.props.imageUrls[1],
+      url3: this.props.imageUrls[2]
     }
   }
 
+
+
   render() {
-    return (<div>
-      <img src={this.state.url1}/>
-      <img src={this.state.url2}/>
-      <img src={this.state.url3}/>
+    const imgStyle = {
+      height: '125px',
+      width: '125px'
+    }
+    const style = {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+    console.log(this.props.imageUrls)
+    return (<div style={style}>
+      <img style={imgStyle} src={this.state.url1} onClick={this.props.onClick}/>
+      <img style={imgStyle} src={this.state.url2} onClick={this.props.onClick}/>
+      <img style={imgStyle} src={this.state.url3} onClick={this.props.onClick}/>
     </div>)
   }
 }
