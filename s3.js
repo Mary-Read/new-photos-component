@@ -31,15 +31,6 @@ const getPictures = () => {
   })
 }
 
-// const getPicture = (givenKey) => {
-//   let params = {
-//     Key: givenKey,
-//     Bucket: bucketName
-//   }
-
-//   s3.getObject(params).createReadStream()
-// }
-
 module.exports = {
   getPictures
 }

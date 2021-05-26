@@ -4,11 +4,12 @@ const multer = require('multer');
 const bodyParser = require('body-parser');
 const db = require('../database/index.js')
 const cors = require('cors');
+const path = require('path')
 const port = 9000;
 
 const router = express.Router();
 
-const dirPath = __dirname + '/../client/dist';
+const dirPath = path.join(__dirname, '/../client/dist');
 app.use('/photos/', router);
 app.use(express.static(dirPath));
 
@@ -19,12 +20,11 @@ app.get(['/', '/p/*'], (req, res) => {
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(cors());
 
-router.get('/p/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   let index = req.params.id;
   db.find({itemId: index})
   .then((data) => {
     let imageUrls = [data[0]._doc.pictures[0], data[0]._doc.pictures[1], data[0]._doc.pictures[2]]
-    console.log(imageUrls);
     res.send(imageUrls);
   })
   .catch((err) => {
