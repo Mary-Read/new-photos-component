@@ -20,6 +20,7 @@ const getPictures = () => {
   console.log('hello');
   return s3.listObjectsV2(params).promise()
   .then((data) => {
+    console.log(data);
     let pictureUrls = data.Contents.map(((content) => {
       let url = `https://${bucketName}.s3.${region}.amazonaws.com/${content.Key}`
       return url;

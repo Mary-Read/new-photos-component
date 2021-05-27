@@ -18,8 +18,9 @@ class Image extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.imageUrls = [];
 
-    let url = window.location.pathname.slice(-1);
-    if (url == '/') {
+    let lastIndex = window.location.pathname.lastIndexOf('/p/');
+    let url = window.location.pathname.slice(lastIndex + 3);
+    if (lastIndex == -1) {
       url = 'http://localhost:9000/photos/' + 0;
     } else {
       url = 'http://localhost:9000/photos/' + url
