@@ -14,7 +14,7 @@ let createPhotoSchema = () => {
   let imageUrls = s3Methods.getPictures()
   .then((data) => {
     let photoData = [];
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 26; i++) {
       let fakeId = i;
       let fakeName = faker.commerce.productName();
       let photos = [data[i*4 + 1], data[i*4 + 2], data[i*4+3]];
@@ -34,6 +34,9 @@ let createPhotoSchema = () => {
   })
 }
 
-createPhotoSchema();
+db.deleteMany({})
+.then(() => {
+  createPhotoSchema();
+})
 
 module.exports = createPhotoSchema
